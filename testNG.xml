@@ -1,0 +1,23 @@
+<suite name="TestNG - Suite for WebDriver test" verbose="0"
+	allow-return-values="true" parallel="tests">
+	<parameter name="param1" value="Parveen" />
+
+	<test name="FirefoxTests" preserve-order="true">
+		<parameter name="browser" value="ff" />
+	
+		<classes>
+			<class name="com.mycompany.app.test1" />
+		</classes>
+	
+	</test>
+	
+	<test name="ChromeTests" preserve-order="true">
+			<parameter name="browser" value="chrome" />
+		<classes>
+			<class name="com.mycompany.app.test1" />
+		</classes>
+	</test>
+
+	
+
+</suite>

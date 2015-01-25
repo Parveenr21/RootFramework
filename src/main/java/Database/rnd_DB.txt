@@ -1,0 +1,75 @@
+//assertequals  will stop the execution on fails
+//verifyequlas will contiue to be executing even on getting failed
+
+
+import com.thoughtworks.selenium.*;
+import java.util.regex.Pattern;
+import java.io.*;
+import java.sql.*;
+ 
+ 
+ 
+public class https extends SeleneseTestCase {
+      public void setUp() throws Exception {
+            setUp("https://192.168.2.72:8443/bms/faces/jsf/patientManagement.jsp", "*iexplore");
+     
+      }
+      public void testUntitled() throws Exception {
+            selenium.open("/bms/faces/login/login.jsp");
+            selenium.type("j_username", "root");
+            selenium.type("j_password", "a@1234");
+            selenium.click("j_id_jsp_1836601855_7");
+            selenium.open("/bms/faces/jsf/patientManagement.jsp");
+            selenium.waitForPageToLoad("30000");
+            int var=0,i,limit;
+            //****************************************
+            Connection con=null;
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+            con=DriverManager.getConnection(
+              "jdbc:oracle:thin:@192.168.2.72:1521:attnsp04",
+              "pfdb",
+              "pfdb");
+            Statement s=con.createStatement();
+            ResultSet rs = s.executeQuery(" select * from patient  ");   
+             
+                 
+                             
+            while(rs.next()) {
+            //System.out.println(rs.getString(1)+"   "+ rs.getString("patient_id"));
+             ++var;
+              }     
+ 
+                         i=var+2;  // patient id base                               
+                       limit=(i+10);  // patient id upper limit
+                  s.close();  
+                     
+                  con.close();
+            //****************************************
+           
+           
+           
+            for (; i<limit;i++)
+            {
+                  String k;
+                  k = ("P"+i);
+                     
+            String m = Integer.toString(i+50);
+           
+           
+            selenium.type("patientManagementBody:patientManagementForm:patientId", k);
+            selenium.type("patientManagementBody:patientManagementForm:middleName", k+"_middle");
+            selenium.type("patientManagementBody:patientManagementForm:firstName", k+"_first_name");
+            selenium.type("patientManagementBody:patientManagementForm:lastName", k+"_last_name");
+            selenium.type("patientManagementBody:patientManagementForm:age", m);
+            selenium.type("patientManagementBody:patientManagementForm:dob", "11/12/1950");
+            selenium.type("patientManagementBody:patientManagementForm:accountNo", "12345");
+            selenium.type("patientManagementBody:patientManagementForm:mrn", "asdfg");
+            selenium.select("patientManagementBody:patientManagementForm:attendingMDName", "label=Chavez Judy");
+            selenium.select("patientManagementBody:patientManagementForm:attendingNurseName", "label=Walt Whitman");
+            selenium.type("patientManagementBody:patientManagementForm:diagnosis", "Diagnosis_"+k);
+            selenium.type("patientManagementBody:patientManagementForm:admitDate", "1/1/2000");
+            selenium.click("patientManagementBody:patientManagementForm:submit");
+            selenium.waitForPageToLoad("30000");
+      }
+}
+}
