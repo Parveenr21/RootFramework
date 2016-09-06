@@ -398,7 +398,7 @@ public class HomePage extends SiteBasePageObject {
       /**
        * Get Local value From Left Nav.
        * @return
-       */
+     `  */
       public String getLocalValueFromLeftNav() {
         return driver.findElement(By.xpath("//*[@id='assetTableBody']//tr[1]//td[2]")).getText();
       }

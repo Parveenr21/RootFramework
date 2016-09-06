@@ -191,7 +191,7 @@ public class ActionUtility {
         FileUtils.copyFile(scrFile, new File(fileName));
         String currentDir = new File(".").getAbsolutePath().replace(".", "");
         currentDir = "file:///" + (currentDir + fileName).replace("\\", "/");
-        String machineName = "fusion.paypal.com/jenkins/view/QA_Marketing/job/Campaign_Studio_Regression/ws/";
+        String machineName = "machine name";
         if (currentDir.contains("hudson") || currentDir.contains("HUDSON")
             || currentDir.contains("JENKINS") || currentDir.contains("FUSION")) {
           currentDir = currentDir.replace("file:///", "http://").replace("jobs", "job").replace(
